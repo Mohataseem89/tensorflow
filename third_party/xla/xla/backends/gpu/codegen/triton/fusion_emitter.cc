@@ -1518,7 +1518,7 @@ absl::StatusOr<mlir::OwningOpRef<mlir::ModuleOp>> EmitXTileModule(
   // many different fusion kinds?
   const std::vector<absl::string_view> kSupportedFusionKinds = {
       kTritonFusionKind,
-      kTritonNestedGemmFusionKind,
+      kTritonGemmFusionKind,
       kTritonCollectiveFusionKind,
   };
 
