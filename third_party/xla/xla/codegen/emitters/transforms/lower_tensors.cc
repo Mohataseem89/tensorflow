@@ -67,6 +67,7 @@ limitations under the License.
 #include "xla/codegen/device_spec.h"
 #include "xla/codegen/emitters/ir/xla_ops.h"
 #include "xla/codegen/emitters/transforms/atomic_rmw_utils.h"
+#include "xla/codegen/emitters/transforms/lowering_utils.h"
 #include "xla/codegen/emitters/transforms/passes.h"
 #include "xla/stream_executor/cuda/cuda_compute_capability.h"
 #include "xla/stream_executor/device_description.h"
@@ -1450,6 +1451,11 @@ class LowerTensorsPass : public impl::LowerTensorsPassBase<LowerTensorsPass> {
         }
       }
     });
+
+    // For AMDGPU, ensure allocas use address space 5 (private)
+    if (device_spec_.IsAmdGpu()) {
+      EnsureAMDGPUAllocasUseAS5(getOperation());
+    }
   }
 
  private:
