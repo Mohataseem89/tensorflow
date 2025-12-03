@@ -49,7 +49,7 @@ limitations under the License.
 //   defined in here, so we end up with *sometimes* including the wrong one and
 //   the entire idea of drop-in replacing gmock.h goes out of the window.
 
-#include_next "gmock/gmock.h"
+#include "gmock/gmock.h.upstream"
 
 #include "absl/status/status.h"
 #include "absl/status/statusor.h"

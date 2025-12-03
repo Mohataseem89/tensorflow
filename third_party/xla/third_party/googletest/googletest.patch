@@ -1,5 +1,5 @@
 diff --git a/BUILD.bazel b/BUILD.bazel
-index cc254457..49120384 100644
+index cc254457..008af6a1 100644
 --- a/BUILD.bazel
 +++ b/BUILD.bazel
 @@ -142,16 +142,16 @@ cc_library(
@@ -39,3 +39,11 @@ index cc254457..49120384 100644
          ],
          "//conditions:default": [],
      }),
+diff --git a/googlemock/include/gmock/gmock.h b/googlemock/include/gmock/gmock.h.upstream
+similarity index 100%
+rename from googlemock/include/gmock/gmock.h
+rename to googlemock/include/gmock/gmock.h.upstream
+diff --git a/googletest/include/gtest/gtest.h b/googletest/include/gtest/gtest.h.upstream
+similarity index 100%
+rename from googletest/include/gtest/gtest.h
+rename to googletest/include/gtest/gtest.h.upstream

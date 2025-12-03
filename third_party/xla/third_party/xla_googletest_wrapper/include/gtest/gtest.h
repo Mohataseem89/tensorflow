@@ -16,6 +16,6 @@ limitations under the License.
 #ifndef GOOGLETEST_WRAPPER_INCLUDE_GTEST_GTEST_H_
 #define GOOGLETEST_WRAPPER_INCLUDE_GTEST_GTEST_H_
 
-#include_next "gtest/gtest.h"
+#include "gtest/gtest.h.upstream"
 
 #endif  // GOOGLETEST_WRAPPER_INCLUDE_GTEST_GTEST_H_
