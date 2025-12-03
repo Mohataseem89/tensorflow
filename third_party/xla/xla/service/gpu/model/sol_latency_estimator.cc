@@ -24,6 +24,7 @@ limitations under the License.
 #include "absl/log/check.h"
 #include "absl/log/log.h"
 #include "absl/status/status.h"
+#include "absl/strings/numbers.h"
 #include "absl/strings/str_cat.h"
 #include "absl/time/time.h"
 #include "xla/hlo/analysis/hlo_dataflow_analysis.h"
@@ -427,6 +428,20 @@ LatencyEstimator::TimeCost SolLatencyEstimator::GetLatencyBetween(
 
 LatencyEstimator::TimeCost SolLatencyEstimator::NodeCost(
     const HloInstruction* instr) const {
+  if (instr->opcode() == HloOpcode::kCustomCall &&
+      instr->has_frontend_attributes() &&
+      instr->frontend_attributes().map().contains("latency_metadata")) {
+    int64_t latency_metadata = 0;
+    CHECK(absl::SimpleAtoi(
+        instr->frontend_attributes().map().at("latency_metadata"),
+        &latency_metadata))
+        << "Failed to parse latency from custom call for " << instr->name()
+        << " from latency_metadata:"
+        << instr->frontend_attributes().map().at("latency_metadata");
+    VLOG(10) << "NodeCost: Returning latency from custom call for "
+             << instr->name() << ": " << latency_metadata / 1000.0 << " us";
+    return (LatencyEstimator::TimeCost)latency_metadata / 1000.0;
+  }
   if (hlo_query::IsAsyncCollectiveStartOp(instr, /*include_send_recv=*/true) ||
       hlo_query::IsAsyncCollectiveDoneOp(instr, /*include_send_recv=*/true)) {
     VLOG(10) << "NodeCost: Returning kLowCost for async start/done op "
