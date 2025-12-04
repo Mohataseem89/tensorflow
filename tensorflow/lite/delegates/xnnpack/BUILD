@@ -329,7 +329,6 @@ cc_library(
         "//tensorflow/lite/kernels/internal:optimized_base",
         "//tensorflow/lite/kernels/internal:reference_base",
         "//tensorflow/lite/kernels/internal:types",
-        "@FP16",
     ],
 )
 

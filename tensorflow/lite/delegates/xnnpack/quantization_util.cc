@@ -19,7 +19,6 @@ limitations under the License.
 #include <cstddef>
 #include <cstdint>
 
-#include "fp16.h"  // from @FP16
 #include "tensorflow/lite/kernels/internal/optimized/optimized_ops.h"
 #include "tensorflow/lite/kernels/internal/reference/dequantize.h"
 #include "tensorflow/lite/kernels/internal/runtime_shape.h"
